@@ -44,25 +44,25 @@ var sassExpanded = {
 };
 
 
-// var prefixOptions = {
-// 	browsers: [
-// 		'Android >= 2.1',
-// 		'Chrome >= 21',
-// 		'Edge >= 12',
-// 		'Explorer >= 7',
-// 		'Firefox >= 17',
-// 		'Opera >= 12.1',
-// 		'Safari >= 6.0'
-// 	],
-// 	cascade: false
-// };
-
 var prefixOptions = {
 	browsers: [
-		'last 10 versions'
+		'Android >= 2.1',
+		'Chrome >= 21',
+		'Edge >= 12',
+		'Explorer >= 7',
+		'Firefox >= 17',
+		'Opera >= 12.1',
+		'Safari >= 6.0'
 	],
 	cascade: false
 };
+
+// var prefixOptions = {
+// 	browsers: [
+// 		'last 10 versions'
+// 	],
+// 	cascade: false
+// };
 
 var postCSSOptions =  {
 	map: false,
@@ -99,7 +99,7 @@ gulp.task( 'commonStyle', function() {
 	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
-	.pipe(postcss(postCSSOptions))
+	.pipe(postcss(postCSSOptions.processors))
 	// .pipe( sourcemaps.write('../maps') )
 	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.root ) ); 
 });
@@ -110,6 +110,7 @@ gulp.task( 'compatibilityStyle', function() {
 	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
+	.pipe(postcss(postCSSOptions.processors))
 	// .pipe( sourcemaps.write('../maps') )
 	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.compatibility ) ); 
 });

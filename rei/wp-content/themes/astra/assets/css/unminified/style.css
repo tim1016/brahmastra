@@ -2402,6 +2402,7 @@ body {
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: reverse;
@@ -2484,6 +2485,7 @@ body {
   display: -webkit-inline-flex;
   display: -moz-inline-box;
   display: -ms-inline-flexbox;
+  -js-display: inline-flex;
   display: inline-flex;
   font-weight: 600;
 }
@@ -2907,6 +2909,7 @@ body {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -3065,6 +3068,7 @@ body {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -3121,6 +3125,7 @@ body {
   display: -webkit-inline-flex;
   display: -moz-inline-box;
   display: -ms-inline-flexbox;
+  -js-display: inline-flex;
   display: inline-flex;
   vertical-align: middle;
   -webkit-box-align: center;
@@ -3193,6 +3198,7 @@ body {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
 }
 
@@ -3663,6 +3669,7 @@ li.ast-masthead-custom-menu-items .ast-search-icon .astra-search-icon {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
@@ -3859,6 +3866,7 @@ li.ast-masthead-custom-menu-items .ast-search-icon .astra-search-icon {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
 }
 
@@ -3928,6 +3936,7 @@ li.ast-masthead-custom-menu-items .ast-search-icon .astra-search-icon {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
@@ -4782,6 +4791,7 @@ input[type="color"]::-webkit-color-swatch {
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
   }
   .ast-author-bio {
@@ -4878,6 +4888,7 @@ input[type="color"]::-webkit-color-swatch {
     display: -webkit-flex;
     display: -moz-box;
     display: -ms-flexbox;
+    -js-display: flex;
     display: flex;
   }
   .single .post-navigation .nav-previous,
@@ -5053,6 +5064,7 @@ input[type="color"]::-webkit-color-swatch {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
@@ -5853,6 +5865,7 @@ input[type="color"]::-webkit-color-swatch {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -5912,6 +5925,7 @@ input[type="color"]::-webkit-color-swatch {
   display: -webkit-inline-flex;
   display: -moz-inline-box;
   display: -ms-inline-flexbox;
+  -js-display: inline-flex;
   display: inline-flex;
   -webkit-box-align: center;
   -webkit-align-items: center;
