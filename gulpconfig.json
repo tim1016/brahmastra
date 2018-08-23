@@ -1,24 +1,24 @@
 {
     "browserSyncOptions" : {
         "proxy" : "http://rei.test",
-        "notify": false
+        "notify": true
     },
+    "themeDir" : "./rei/wp-content/themes/astra/",
     "browserSyncWatchFiles" : [
-        "./app/wp-content/themes/astra/css/*.min.css",
-        "./app/wp-content/themes/astra/js/*.min.js",
-        "./app/wp-content/themes/astra/**/*.php"
+        "./rei/wp-content/themes/astra/css/*.min.css",
+        "./rei/wp-content/themes/astra/js/*.min.js",
+        "./rei/wp-content/themes/astra/**/*.php"
     ],
     "paths" : {
-        "js": "./app/wp-content/themes/astra/js",
-        "css": "./app/wp-content/themes/astra/css",
-        "img": "./app/wp-content/themes/astra/img",
-        "imgsrc": "./app/wp-content/themes/astra/src/img",
-        "sass": "./app/wp-content/themes/astra/sass",
+        "js": "./rei/wp-content/themes/astra/js",
+        "css": "./rei/wp-content/themes/astra/css",
+        "img": "./rei/wp-content/themes/astra/img",
+        "imgsrc": "./rei/wp-content/themes/astra/src/img",
+        "sass": "./rei/wp-content/themes/astra/sass",
         "node": "./node_modules/",
-        "bower": "./bower_components/",
-        "dev": "./app/wp-content/themes/astra/src",
-        "dist": "./app/wp-content/themes/astra/dist",
-        "distprod": "./app/wp-content/themes/astra/dist-product",
+        "bower": "./bower_components/", 
+        "dev": "./rei/wp-content/themes/astra/src",
+        "dist": "./rei/wp-content/themes/astra/dist",
         "vendor": ""
     }
 }

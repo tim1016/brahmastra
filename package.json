@@ -3,8 +3,18 @@
   "version": "1.0.0",
   "description": "Customization of astra for real estate websites",
   "main": "gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "code-prettify": "^0.1.0",
+    "jquery": "3.2.1",
+    "jquery-validation": "^1.17.0",
+    "minimatch": "^3.0.2",
+    "normalize.css": "7.0.0",
+    "slick-carousel": "1.8.1"
+  },
   "devDependencies": {
+    "@babel/core": "7.0.0-beta.34",
+    "@babel/preset-env": "7.0.0-beta.34",
+    "autoprefixer": "^8.6.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
@@ -18,8 +28,7 @@
     "gulp-clean": "^0.4.0",
     "gulp-compress": "0.0.9",
     "gulp-concat": "^2.6.1",
-    "gulp-copy": "^1.1.0",
-    "gulp-cssmin": "^0.2.0",
+    "gulp-if": "^2.0.2",
     "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.0",
     "gulp-postcss": "^8.0.0",
@@ -48,6 +57,5 @@
   "license": "GPL-3.0+",
   "bugs": {
     "url": "https://github.com/tim1016/brahmastra/issues"
-  },
-  "homepage": "https://github.com/tim1016/brahmastra#readme"
+  }
 }
