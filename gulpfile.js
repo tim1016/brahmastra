@@ -1,6 +1,6 @@
 // Load Gulp...of course
 var gulp         = require( 'gulp' );
-var settings = require('./junk.json');
+var paths = require('./junk.json');
 
 // CSS related plugins
 var sass         = require( 'gulp-sass' );
@@ -26,14 +26,14 @@ var gulpif       = require( 'gulp-if' );
 
 var SRC = '';
 var DEST ='';
-var themeDirectory       = settings.themeDirectory;
+var themeDirectory       = paths.themeDirectory;
 var mapURL  = themeDirectory;
 
 
 gulp.task( 'customizerStyles', function() {
-    console.log(settings.customizerFiles.length);
-    for (i = 0; i < settings.customizerFiles.length; i++) { 
-		gulp.src( themeDirectory + settings.customizerFiles[i] + '*.scss' )
+    // console.log(paths.customizerFiles.length);
+    for (i = 0; i < paths.customizerFiles.length; i++) { 
+		gulp.src( themeDirectory + paths.customizerFiles[i] + '*.scss' )
 		.pipe( sourcemaps.init() )
 		.pipe( sass({
 			errLogToConsole: true,
@@ -42,7 +42,7 @@ gulp.task( 'customizerStyles', function() {
 		.on( 'error', console.error.bind( console ) )
 		.pipe( autoprefixer({ browsers: [ 'last 10 versions', 'cover 99.5%' ] }) )
 		.pipe( sourcemaps.write('../maps') )
-		.pipe( gulp.dest( themeDirectory + settings.customizerFiles[i] ) ); 
+		.pipe( gulp.dest( themeDirectory + paths.customizerFiles[i] ) ); 
     }
 });
 
