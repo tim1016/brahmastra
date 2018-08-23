@@ -32,19 +32,19 @@ var mapURL       = settings.themeDirectory;
 gulp.task( 'printPaths', function() {
     console.log(settings.customizerFiles.length);
     for (i = 0; i < settings.customizerFiles.length; i++) { 
-		SRC  = settings.themeDirectory + settings.customizerFiles[i].src;
+		SRC  = settings.themeDirectory + settings.customizerFiles[i] + '*.scss';
 		// The parent directory is needed because gulp.dest needs a directory not the file
-        DEST = settings.themeDirectory + settings.customizerFiles[i].dest + '/../'; 
+        DEST = settings.themeDirectory + settings.customizerFiles[i]; 
 
 		gulp.src( SRC )
-		.pipe( sourcemaps.init() )
+		// .pipe( sourcemaps.init() )
 		.pipe( sass({
 			errLogToConsole: true,
 			outputStyle: 'expanded'
 		}) )
 		.on( 'error', console.error.bind( console ) )
 		.pipe( autoprefixer({ browsers: [ 'last 10 versions', 'cover 99.5%' ] }) )
-		.pipe( sourcemaps.write( DEST ) )
+		// .pipe( sourcemaps.write( DEST ) )
 		.pipe( gulp.dest( DEST ) ); 
 		SRC='';
 		DEST='';

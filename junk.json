@@ -1,49 +1,14 @@
 {
     "themeDirectory" : "./rei/wp-content/themes/astra/",
     "customizerFiles": [
-        {
-            "dest":"assets/css/unminified/editor-style.css",
-            "src": "sass/editor-style.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/responsive/responsive.css",
-            "src": "inc/customizer/custom-controls/responsive/responsive.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/divider/divider.css",
-            "src": "inc/customizer/custom-controls/divider/divider.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/heading/heading.css",
-            "src": "inc/customizer/custom-controls/heading/heading.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/description/description.css",
-            "src": "inc/customizer/custom-controls/description/description.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/radio-image/radio-image.css",
-            "src": "inc/customizer/custom-controls/radio-image/radio-image.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/slider/slider.css",
-            "src": "inc/customizer/custom-controls/slider/slider.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/sortable/sortable.css",
-            "src": "inc/customizer/custom-controls/sortable/sortable.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/spacing/spacing.css",
-            "src": "inc/customizer/custom-controls/spacing/spacing.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/responsive-spacing/responsive-spacing.css",
-            "src": "inc/customizer/custom-controls/responsive-spacing/responsive-spacing.scss"
-        },
-        {
-            "dest":"inc/customizer/custom-controls/background/background.css",
-            "src": "inc/customizer/custom-controls/background/background.scss"
-        }
+            "inc/customizer/custom-controls/responsive/",
+            "inc/customizer/custom-controls/divider/",
+            "inc/customizer/custom-controls/heading/",
+            "inc/customizer/custom-controls/description/",
+            "inc/customizer/custom-controls/radio-image/",
+            "inc/customizer/custom-controls/slider/",
+            "inc/customizer/custom-controls/sortable/",
+            "inc/customizer/custom-controls/spacing/",
+            "inc/customizer/custom-controls/responsive-spacing/"
     ]
 }
