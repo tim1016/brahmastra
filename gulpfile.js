@@ -24,10 +24,16 @@ var plumber      = require( 'gulp-plumber' );
 var options      = require( 'gulp-options' );
 var gulpif       = require( 'gulp-if' );
 
+var SRC = '';
+var DEST ='';
 
 
-// console.log(settings);
+gulp.task( 'printPaths', function() {
+    console.log(settings.customizerFiles.length);
+    for (i = 0; i < settings.customizerFiles.length; i++) { 
+        SRC  = settings.themeDirectory + settings.customizerFiles[i].src;
+        DEST = settings.themeDirectory + settings.customizerFiles[i].dest;
+        console.log(SRC);
+    }
 
-console.log(settings.customizer.length);
-
-// var content = JSON.parse(settings);
+});
