@@ -26,25 +26,26 @@ var gulpif       = require( 'gulp-if' );
 
 var SRC = '';
 var DEST ='';
-var mapURL       = settings.themeDirectory;
+var themeDirectory       = settings.themeDirectory;
+var mapURL  = themeDirectory;
 
 
 gulp.task( 'printPaths', function() {
     console.log(settings.customizerFiles.length);
     for (i = 0; i < settings.customizerFiles.length; i++) { 
-		SRC  = settings.themeDirectory + settings.customizerFiles[i] + '*.scss';
+		SRC  = themeDirectory + settings.customizerFiles[i] + '*.scss';
 		// The parent directory is needed because gulp.dest needs a directory not the file
-        DEST = settings.themeDirectory + settings.customizerFiles[i]; 
+        DEST = themeDirectory + settings.customizerFiles[i]; 
 
 		gulp.src( SRC )
-		// .pipe( sourcemaps.init() )
+		.pipe( sourcemaps.init() )
 		.pipe( sass({
 			errLogToConsole: true,
 			outputStyle: 'expanded'
 		}) )
 		.on( 'error', console.error.bind( console ) )
 		.pipe( autoprefixer({ browsers: [ 'last 10 versions', 'cover 99.5%' ] }) )
-		// .pipe( sourcemaps.write( DEST ) )
+		.pipe( sourcemaps.write() )
 		.pipe( gulp.dest( DEST ) ); 
 		SRC='';
 		DEST='';
