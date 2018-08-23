@@ -31,7 +31,6 @@ var mapURL  = themeDirectory;
 
 
 gulp.task( 'customizerStyles', function() {
-    // console.log(paths.customizerFiles.length);
     for (i = 0; i < paths.customizerFiles.length; i++) { 
 		gulp.src( themeDirectory + paths.customizerFiles[i] + '*.scss' )
 		.pipe( sourcemaps.init() )
@@ -44,5 +43,18 @@ gulp.task( 'customizerStyles', function() {
 		.pipe( sourcemaps.write('../maps') )
 		.pipe( gulp.dest( themeDirectory + paths.customizerFiles[i] ) ); 
     }
+});
+
+gulp.task( 'editorStyles', function() {
+	gulp.src( themeDirectory + paths.editorFiles.src )
+	.pipe( sourcemaps.init() )
+	.pipe( sass({
+		errLogToConsole: true,
+		outputStyle: 'expanded'
+	}) )
+	.on( 'error', console.error.bind( console ) )
+	.pipe( autoprefixer({ browsers: [ 'last 10 versions', 'cover 99.5%' ] }) )
+	.pipe( sourcemaps.write('../maps') )
+	.pipe( gulp.dest( themeDirectory + paths.editorFiles.dest ) ); 
 });
 

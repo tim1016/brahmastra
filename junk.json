@@ -1,14 +1,18 @@
 {
     "themeDirectory" : "./rei/wp-content/themes/astra/",
     "customizerFiles": [
-            "inc/customizer/custom-controls/responsive/",
-            "inc/customizer/custom-controls/divider/",
-            "inc/customizer/custom-controls/heading/",
-            "inc/customizer/custom-controls/description/",
-            "inc/customizer/custom-controls/radio-image/",
-            "inc/customizer/custom-controls/slider/",
-            "inc/customizer/custom-controls/sortable/",
-            "inc/customizer/custom-controls/spacing/",
-            "inc/customizer/custom-controls/responsive-spacing/"
-    ]
+        "inc/customizer/custom-controls/responsive/",
+        "inc/customizer/custom-controls/divider/",
+        "inc/customizer/custom-controls/heading/",
+        "inc/customizer/custom-controls/description/",
+        "inc/customizer/custom-controls/radio-image/",
+        "inc/customizer/custom-controls/slider/",
+        "inc/customizer/custom-controls/sortable/",
+        "inc/customizer/custom-controls/spacing/",
+        "inc/customizer/custom-controls/responsive-spacing/"
+    ],
+    "editorFiles":{
+        "src": "sass/editor-style.scss",
+        "dest": "assets/css/unminified/"
+    }
 }
