@@ -68,11 +68,22 @@ gulp.task( 'editorStyles', function() {
 	.pipe( gulp.dest( themeDirectory + paths.editorFiles.dest ) ); 
 });
 
+
 gulp.task( 'commonStyle', function() {
 	gulp.src( themeDirectory + paths.sass.root + 'style.scss' )
 	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	// .pipe( sourcemaps.write('../maps') )
-	.pipe( gulp.dest( themeDirectory + paths.assets.unminified ) ); 
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.root ) ); 
+});
+
+
+gulp.task( 'compatibilityStyle', function() {
+	gulp.src( themeDirectory + paths.sass.compatibility + '**.scss' )
+	// .pipe( sourcemaps.init() )
+	.pipe( sass(sassExpanded).on('error', sass.logError))  
+	.pipe( autoprefixer(prefixOptions) )
+	// .pipe( sourcemaps.write('../maps') )
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.compatibility ) ); 
 });

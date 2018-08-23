@@ -25,7 +25,11 @@
         "root": "assets/",
         "cssroot" : "assets/css/",
         "css"   : {
-            "unminified" : "assets/css/unminified/",
+            "unminified" : {
+                "root": "assets/css/unminified/",
+                "compatibility": "assets/css/unminified/compatibility",
+                "woocommerce" : "assets/css/unminified/compatibility/woocommerce"
+            },
             "minified" : "assets/css/minified/"
         }
     }
