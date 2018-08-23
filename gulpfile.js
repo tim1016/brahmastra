@@ -35,6 +35,7 @@ gulp.task( 'printPaths', function() {
 		SRC  = settings.themeDirectory + settings.customizerFiles[i].src;
 		// The parent directory is needed because gulp.dest needs a directory not the file
         DEST = settings.themeDirectory + settings.customizerFiles[i].dest + '/../'; 
+
 		gulp.src( SRC )
 		.pipe( sourcemaps.init() )
 		.pipe( sass({
@@ -44,7 +45,11 @@ gulp.task( 'printPaths', function() {
 		.on( 'error', console.error.bind( console ) )
 		.pipe( autoprefixer({ browsers: [ 'last 10 versions', 'cover 99.5%' ] }) )
 		.pipe( sourcemaps.write( DEST ) )
-		.pipe( gulp.dest( DEST ) ); 		
+		.pipe( gulp.dest( DEST ) ); 
+		SRC='';
+		DEST='';
+		
     }
+
 });
 
