@@ -1,0 +1,1 @@
+{"version":3,"sources":["divider.scss"],"names":[],"mappings":"AAAA;EACC,gBAAe;EACf,oBAAmB;CACnB","file":"../divider/divider.css","sourcesContent":[".customize-control-ast-divider .customize-control-title {\n\tfont-size: 15px;\n\tmargin: 1em 0 0.2em;\n}\n"]}
