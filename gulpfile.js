@@ -24,6 +24,14 @@ var plumber      = require( 'gulp-plumber' );
 var options      = require( 'gulp-options' );
 var gulpif       = require( 'gulp-if' );
 
+//postCSS specific
+var postcss		 = require( 'gulp-postcss' );
+var postCSSautoprefixer = require('autoprefixer');
+var flexibility     = require('postcss-flexibility');
+
+
+
+
 var SRC = '';
 var DEST ='';
 var themeDirectory       = paths.themeDirectory;
@@ -35,12 +43,6 @@ var sassExpanded = {
 	linefeed: 'lf'
 };
 
-var prefixOptions = {
-	browsers: [
-		'last 10 versions'
-	],
-	cascade: false
-};
 
 // var prefixOptions = {
 // 	browsers: [
@@ -54,6 +56,22 @@ var prefixOptions = {
 // 	],
 // 	cascade: false
 // };
+
+var prefixOptions = {
+	browsers: [
+		'last 10 versions'
+	],
+	cascade: false
+};
+
+var postCSSOptions =  {
+	map: false,
+	processors: [
+		flexibility,
+		postCSSautoprefixer(prefixOptions)
+	]
+}
+
 
 gulp.task( 'customizerStyles', function() {
     for (i = 0; i < paths.customizerFiles.length; i++) { 
@@ -81,6 +99,7 @@ gulp.task( 'commonStyle', function() {
 	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
+	.pipe(postcss(postCSSOptions))
 	// .pipe( sourcemaps.write('../maps') )
 	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.root ) ); 
 });
