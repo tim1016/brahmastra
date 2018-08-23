@@ -11,8 +11,22 @@
         "inc/customizer/custom-controls/spacing/",
         "inc/customizer/custom-controls/responsive-spacing/"
     ],
-    "editorFiles":{
+    "editorFiles" : {
         "src": "sass/editor-style.scss",
         "dest": "assets/css/unminified/"
+    },
+    "sass" : {
+        "root" : "sass/",
+        "site" : "sass/site/",
+        "compatibility" : "sass/site/compatibility/",
+        "woocommerce"   : "sass/site/compatibility/woocommerce/"
+    },
+    "assets": {
+        "root": "assets/",
+        "cssroot" : "assets/css/",
+        "css"   : {
+            "unminified" : "assets/css/unminified/",
+            "minified" : "assets/css/minified/"
+        }
     }
 }

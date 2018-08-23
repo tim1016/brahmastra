@@ -200,8 +200,8 @@ figure {
 
 hr {
   -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-          box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
   height: 0;
 }
 
@@ -261,8 +261,8 @@ input {
 input[type="checkbox"],
 input[type="radio"] {
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0;
 }
 
@@ -274,16 +274,15 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
-     -moz-box-sizing: content-box;
-          box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
 }
 
 .search .search-submit,
 #comments .submit {
   padding: 10px 15px;
   -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
+  border-radius: 2px;
 }
 
 input[type="search"]::-webkit-search-cancel-button,
@@ -1307,8 +1306,8 @@ h6,
 --------------------------------------------------------------*/
 html {
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
@@ -1316,8 +1315,8 @@ html {
 *:after {
   /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
   -webkit-box-sizing: inherit;
-     -moz-box-sizing: inherit;
-          box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body {
@@ -1521,8 +1520,7 @@ input[type="submit"] {
   border: 1px solid;
   border-color: #eaeaea;
   -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
+  border-radius: 2px;
   background: #e6e6e6;
   padding: .6em 1em .4em;
   color: #fff;
@@ -1568,8 +1566,7 @@ textarea {
   color: #666;
   border: 1px solid #ccc;
   -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
+  border-radius: 2px;
   -webkit-appearance: none;
 }
 
@@ -1603,11 +1600,9 @@ textarea {
 .screen-reader-text:focus {
   background-color: #f1f1f1;
   -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
+  border-radius: 2px;
   -webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-     -moz-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-          box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
   clip: auto !important;
   color: #21759b;
   display: block;
@@ -1810,8 +1805,6 @@ a,
 .site-footer a *,
 .secondary a * {
   -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
 
@@ -1849,13 +1842,11 @@ blockquote {
 input[type="button"],
 input[type="submit"] {
   -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
   padding: 18px 30px;
   border: 0;
   -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   text-shadow: none;
 }
 
@@ -1864,8 +1855,7 @@ input[type="submit"] {
 input[type="button"]:hover,
 input[type="submit"]:hover {
   -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 .ast-button:active, .ast-button:focus,
@@ -1876,8 +1866,7 @@ input[type="button"]:focus,
 input[type="submit"]:active,
 input[type="submit"]:focus {
   -webkit-box-shadow: none;
-     -moz-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 .site-title {
@@ -1896,8 +1885,6 @@ input[type="submit"]:focus {
 .site-description:hover a,
 .site-description:focus a {
   -webkit-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  -moz-transition: all 0.2s linear;
   transition: all 0.2s linear;
 }
 
@@ -1945,8 +1932,7 @@ input[type="submit"]:focus {
   right: 0;
   padding: 0 1em;
   -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
+  border-radius: 0;
 }
 
 .ast-header-break-point.ast-header-custom-item-inside .main-header-bar .ast-search-menu-icon .search-form {
@@ -1959,8 +1945,7 @@ input[type="submit"]:focus {
 .site .skip-link {
   background-color: #f1f1f1;
   -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
-     -moz-box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.2);
   color: #21759b;
   display: block;
   font-family: Montserrat, "Helvetica Neue", sans-serif;
@@ -1985,8 +1970,7 @@ input[type="submit"]:focus {
 
 .logged-in .site .skip-link {
   -webkit-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
-     -moz-box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
   font-family: "Open Sans", sans-serif;
 }
 
@@ -2030,8 +2014,7 @@ textarea {
   color: black;
   padding: 10px;
   -webkit-border-radius: 0 0 2px 2px;
-     -moz-border-radius: 0 0 2px 2px;
-          border-radius: 0 0 2px 2px;
+  border-radius: 0 0 2px 2px;
   border: 1px solid #eaeaea;
   border-top: none;
   font-size: 0.9em;
@@ -2040,8 +2023,7 @@ textarea {
 .gallery-icon {
   border-bottom: 0;
   -webkit-border-radius: 2px 2px 0 0;
-     -moz-border-radius: 2px 2px 0 0;
-          border-radius: 2px 2px 0 0;
+  border-radius: 2px 2px 0 0;
   border: 1px solid #eaeaea;
   overflow: hidden;
 }
@@ -2050,8 +2032,7 @@ textarea {
   margin: 0;
   padding: 10px;
   -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
+  border-radius: 2px;
 }
 
 .gallery-item:last-child {

@@ -29,32 +29,50 @@ var DEST ='';
 var themeDirectory       = paths.themeDirectory;
 var mapURL  = themeDirectory;
 
+var sassExpanded = {
+	errLogToConsole: true,
+	outputStyle: 'expanded',
+	linefeed: 'lf'
+};
+
+var prefixOptions = {
+	browsers: [
+		'Android >= 2.1',
+		'Chrome >= 21',
+		'Edge >= 12',
+		'Explorer >= 7',
+		'Firefox >= 17',
+		'Opera >= 12.1',
+		'Safari >= 6.0'
+	],
+	cascade: false
+};
 
 gulp.task( 'customizerStyles', function() {
     for (i = 0; i < paths.customizerFiles.length; i++) { 
 		gulp.src( themeDirectory + paths.customizerFiles[i] + '*.scss' )
-		.pipe( sourcemaps.init() )
-		.pipe( sass({
-			errLogToConsole: true,
-			outputStyle: 'expanded'
-		}) )
-		.on( 'error', console.error.bind( console ) )
-		.pipe( autoprefixer({ browsers: [ 'last 10 versions', 'cover 99.5%' ] }) )
-		.pipe( sourcemaps.write('../maps') )
+		// .pipe( sourcemaps.init() )
+		.pipe( sass(sassExpanded).on('error', sass.logError))
+		.pipe( autoprefixer(prefixOptions) )
+		// .pipe( sourcemaps.write('../maps') )
 		.pipe( gulp.dest( themeDirectory + paths.customizerFiles[i] ) ); 
     }
 });
 
 gulp.task( 'editorStyles', function() {
 	gulp.src( themeDirectory + paths.editorFiles.src )
-	.pipe( sourcemaps.init() )
-	.pipe( sass({
-		errLogToConsole: true,
-		outputStyle: 'expanded'
-	}) )
-	.on( 'error', console.error.bind( console ) )
-	.pipe( autoprefixer({ browsers: [ 'last 10 versions', 'cover 99.5%' ] }) )
-	.pipe( sourcemaps.write('../maps') )
+	// .pipe( sourcemaps.init() )
+	.pipe( sass(sassExpanded).on('error', sass.logError))  
+	.pipe( autoprefixer(prefixOptions) )
+	// .pipe( sourcemaps.write('../maps') )
 	.pipe( gulp.dest( themeDirectory + paths.editorFiles.dest ) ); 
 });
 
+gulp.task( 'commonStyle', function() {
+	gulp.src( themeDirectory + paths.sass.root + 'style.scss' )
+	// .pipe( sourcemaps.init() )
+	.pipe( sass(sassExpanded).on('error', sass.logError))  
+	.pipe( autoprefixer(prefixOptions) )
+	// .pipe( sourcemaps.write('../maps') )
+	.pipe( gulp.dest( themeDirectory + paths.assets.unminified ) ); 
+});
