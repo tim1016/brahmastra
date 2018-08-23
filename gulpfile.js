@@ -37,16 +37,23 @@ var sassExpanded = {
 
 var prefixOptions = {
 	browsers: [
-		'Android >= 2.1',
-		'Chrome >= 21',
-		'Edge >= 12',
-		'Explorer >= 7',
-		'Firefox >= 17',
-		'Opera >= 12.1',
-		'Safari >= 6.0'
+		'last 10 versions'
 	],
 	cascade: false
 };
+
+// var prefixOptions = {
+// 	browsers: [
+// 		'Android >= 2.1',
+// 		'Chrome >= 21',
+// 		'Edge >= 12',
+// 		'Explorer >= 7',
+// 		'Firefox >= 17',
+// 		'Opera >= 12.1',
+// 		'Safari >= 6.0'
+// 	],
+// 	cascade: false
+// };
 
 gulp.task( 'customizerStyles', function() {
     for (i = 0; i < paths.customizerFiles.length; i++) { 
