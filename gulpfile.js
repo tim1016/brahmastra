@@ -26,14 +26,54 @@ var gulpif       = require( 'gulp-if' );
 
 var SRC = '';
 var DEST ='';
+var mapURL       = settings.themeDirectory;
 
 
 gulp.task( 'printPaths', function() {
     console.log(settings.customizerFiles.length);
     for (i = 0; i < settings.customizerFiles.length; i++) { 
         SRC  = settings.themeDirectory + settings.customizerFiles[i].src;
-        DEST = settings.themeDirectory + settings.customizerFiles[i].dest;
-        console.log(SRC);
+        DEST = settings.themeDirectory + settings.customizerFiles[i].dest + '/../';
+
+		gulp.src( SRC )
+		// .pipe( sourcemaps.init() )
+		.pipe( sass({
+			errLogToConsole: true,
+			outputStyle: 'expanded'
+		}) )
+		.on( 'error', console.error.bind( console ) )
+		.pipe( autoprefixer({ browsers: [ 'last 10 versions', 'cover 99.5%' ] }) )
+		// .pipe( sourcemaps.write( DEST ) )
+		.pipe( gulp.dest( DEST ) ); 
+		SRC='';
+		DEST='';
+
+
+		// .pipe( browserSync.stream() );
+
+
+
+        // SRC  = settings.themeDirectory + settings.customizerFiles[i].src;
+        // DEST = settings.themeDirectory + settings.customizerFiles[i].dest;
+		// console.log(SRC);
+		// console.log(DEST);
+		
     }
 
 });
+
+
+
+// gulp.task( 'pluginStyles', function() {
+// 	gulp.src( [styleSRC, styleForm, styleSlider] )
+// 		.pipe( sourcemaps.init() )
+// 		.pipe( sass({
+// 			errLogToConsole: true,
+// 			outputStyle: 'compressed'
+// 		}) )
+// 		.on( 'error', console.error.bind( console ) )
+// 		.pipe( autoprefixer({ browsers: [ 'last 2 versions', '> 5%', 'Firefox ESR' ] }) )
+// 		.pipe( sourcemaps.write( mapURL ) )
+// 		.pipe( gulp.dest( styleURL ) )
+// 		.pipe( browserSync.stream() );
+// });

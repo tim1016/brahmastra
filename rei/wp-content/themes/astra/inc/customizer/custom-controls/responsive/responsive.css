@@ -35,6 +35,8 @@
 
 .customize-control-ast-responsive .input-wrapper input {
   display: none;
+  width: -webkit-calc(100% - 52px);
+  width: -moz-calc(100% - 52px);
   width: calc(100% - 52px);
   float: left;
 }
