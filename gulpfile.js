@@ -87,3 +87,12 @@ gulp.task( 'compatibilityStyle', function() {
 	// .pipe( sourcemaps.write('../maps') )
 	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.compatibility ) ); 
 });
+
+gulp.task( 'woocommerceStyle', function() {
+	gulp.src( themeDirectory + paths.sass.woocommerce + '**.scss' )
+	// .pipe( sourcemaps.init() )
+	.pipe( sass(sassExpanded).on('error', sass.logError))  
+	.pipe( autoprefixer(prefixOptions) )
+	// .pipe( sourcemaps.write('../maps') )
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.woocommerce ) ); 
+});

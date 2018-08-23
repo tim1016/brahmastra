@@ -491,7 +491,6 @@ body #learndash_profile #course_list {
 
 body #learndash_profile .profile_info .flip > div:nth-child(2),
 body #learndash_profile #course_list .flip > div:nth-child(2) {
-  -js-display: flex;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;

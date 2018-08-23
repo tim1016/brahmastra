@@ -442,7 +442,6 @@ body .course .llms-course-progress,
 body .llms-course-progress {
   max-width: 100%;
   margin: 0 auto;
-  -js-display: flex;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
