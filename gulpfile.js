@@ -5,7 +5,7 @@ var paths = require('./junk.json');
 // CSS related plugins
 var sass         = require( 'gulp-sass' );
 var autoprefixer = require( 'gulp-autoprefixer' );
-var minifycss    = require( 'gulp-uglifycss' );
+let minifyCSS    = require('gulp-clean-css');
 
 // JS related plugins
 var concat       = require( 'gulp-concat' );
@@ -32,12 +32,10 @@ var flexibility     = require('postcss-flexibility');
 //rtlcss
 var rtlcss       = require('gulp-rtlcss');
 var filter       = require('gulp-filter');
-const f = filter(paths.rtlExclude);
+// const f = filter(paths.excludeAll); // exclude these files from generating rtlcss
+const f = filter(['**/*.css', paths.excludeRTL, paths.excludeFA, paths.excludeFonts]);
 
 
-
-var SRC = '';
-var DEST ='';
 var themeDirectory       = paths.themeDirectory;
 var mapURL  = themeDirectory;
 
@@ -75,31 +73,28 @@ var postCSSOptions =  {
 		postCSSautoprefixer(prefixOptions)
 	]
 }
-// exclude these files from generating rtlcss
-
-
-
-
 
 
 gulp.task( 'customizerStyles', function() {
     for (i = 0; i < paths.customizerFiles.length; i++) { 
 		gulp.src( themeDirectory + paths.customizerFiles[i] + '*.scss' )
-		// .pipe( sourcemaps.init() )
 		.pipe( sass(sassExpanded).on('error', sass.logError))
 		.pipe( autoprefixer(prefixOptions) )
-		// .pipe( sourcemaps.write('../maps') )
 		.pipe( gulp.dest( themeDirectory + paths.customizerFiles[i] ) ); 
     }
 });
 
-gulp.task( 'editorStyles', function() {
+gulp.task( 'editorStyle', function() {
 	gulp.src( themeDirectory + paths.editorFiles.src )
 	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	// .pipe( sourcemaps.write('../maps') )
-	.pipe( gulp.dest( themeDirectory + paths.editorFiles.dest ) ); 
+	.pipe( gulp.dest( themeDirectory + paths.editorFiles.dest ))
+	.pipe(f)
+	.pipe(rtlcss()) 
+	.pipe(rename({ suffix: '-rtl' })) 
+	.pipe(gulp.dest(themeDirectory + paths.editorFiles.dest)); 
 });
 
 
@@ -108,30 +103,34 @@ gulp.task( 'commonStyle', function() {
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	.pipe(postcss(postCSSOptions.processors))
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.root ) )
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.root ))
 	.pipe(f)
-	.pipe(rtlcss()) // Convert to RTL.
-	.pipe(rename({ suffix: '-rtl' })) // Append "-rtl" to the filename.
-	.pipe(gulp.dest(themeDirectory + paths.assets.css.unminified.root)); // Output RTL stylesheets. 
+	.pipe(rtlcss()) 
+	.pipe(rename({ suffix: '-rtl' })) 
+	.pipe(gulp.dest(themeDirectory + paths.assets.css.unminified.root)); 
 });
 
 
 gulp.task( 'compatibilityStyle', function() {
 	gulp.src( themeDirectory + paths.sass.compatibility + '**.scss' )
-	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	.pipe(postcss(postCSSOptions.processors))
-	// .pipe( sourcemaps.write('../maps') )
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.compatibility ) ); 
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.compatibility ))
+	.pipe(f)
+	.pipe(rtlcss()) 
+	.pipe(rename({ suffix: '-rtl' })) 
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.compatibility )); 
 });
 
 gulp.task( 'woocommerceStyle', function() {
 	gulp.src( themeDirectory + paths.sass.woocommerce + '**.scss' )
-	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
-	// .pipe( sourcemaps.write('../maps') )
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.woocommerce ) ); 
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.woocommerce ))
+	.pipe(f)
+	.pipe(rtlcss()) 
+	.pipe(rename({ suffix: '-rtl' })) 
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.woocommerce )); 
 });
 

@@ -285,6 +285,7 @@
 .woocommerce ul.products, .woocommerce-page ul.products {
   display: -webkit-box;
   display: -webkit-flex;
+  display: -moz-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-flex-wrap: wrap;
@@ -784,6 +785,7 @@
 
 .woocommerce form .form-row .input-text, .woocommerce-page form .form-row .input-text {
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
 }

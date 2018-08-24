@@ -1,6 +1,9 @@
 {
     "themeDirectory" : "./rei/wp-content/themes/astra/",
-    "rtlExclude" : [
+    "excludeRTL" : "**/!*-rtl.css",
+    "excludeFA" :  "**/!font-awesome.css",
+    "excludeFonts" : "**/!astra-fonts.css",
+    "excludeAll" : [
         "**/*.css",
         "**/!*-rtl.css",
         "**/!font-awesome.css",
