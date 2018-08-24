@@ -5,7 +5,7 @@ var paths = require('./junk.json');
 // CSS related plugins
 var sass         = require( 'gulp-sass' );
 var autoprefixer = require( 'gulp-autoprefixer' );
-let minifyCSS    = require('gulp-clean-css');
+
 
 // JS related plugins
 var concat       = require( 'gulp-concat' );
@@ -33,7 +33,19 @@ var flexibility     = require('postcss-flexibility');
 var rtlcss       = require('gulp-rtlcss');
 var filter       = require('gulp-filter');
 // const f = filter(paths.excludeAll); // exclude these files from generating rtlcss
-const f = filter(['**/*.css', paths.excludeRTL, paths.excludeFA, paths.excludeFonts]);
+noRTL = paths.excludeRTL;
+noFontAwesome = paths.excludeFA;
+noFonts = paths.excludeFonts;
+const filterAll = filter(["**/*.css", noRTL, noFontAwesome, noAstraFonts], {restore: true});
+const filterRTL = filter(["**/*.css", noRTL], {restore: true});
+
+
+const unminified = themeDirectory + paths.assets.css.unminified;
+const minified   = themeDirectory + paths.assets.css.minified; 
+
+
+//minify CSS using gulp-clean-css
+let minifyCSS    = require('gulp-clean-css');
 
 
 var themeDirectory       = paths.themeDirectory;
@@ -75,12 +87,12 @@ var postCSSOptions =  {
 }
 
 
-gulp.task( 'customizerStyles', function() {
+gulp.task( 'customizerStyle', function() {
     for (i = 0; i < paths.customizerFiles.length; i++) { 
 		gulp.src( themeDirectory + paths.customizerFiles[i] + '*.scss' )
 		.pipe( sass(sassExpanded).on('error', sass.logError))
 		.pipe( autoprefixer(prefixOptions) )
-		.pipe( gulp.dest( themeDirectory + paths.customizerFiles[i] ) ); 
+		.pipe( gulp.dest( themeDirectory + paths.customizerFiles[i] )); 
     }
 });
 
@@ -91,7 +103,7 @@ gulp.task( 'editorStyle', function() {
 	.pipe( autoprefixer(prefixOptions) )
 	// .pipe( sourcemaps.write('../maps') )
 	.pipe( gulp.dest( themeDirectory + paths.editorFiles.dest ))
-	.pipe(f)
+	.pipe(filterAll)
 	.pipe(rtlcss()) 
 	.pipe(rename({ suffix: '-rtl' })) 
 	.pipe(gulp.dest(themeDirectory + paths.editorFiles.dest)); 
@@ -103,11 +115,11 @@ gulp.task( 'commonStyle', function() {
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	.pipe(postcss(postCSSOptions.processors))
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.root ))
-	.pipe(f)
+	.pipe( gulp.dest(unminified))
+	.pipe(filterAll)
 	.pipe(rtlcss()) 
 	.pipe(rename({ suffix: '-rtl' })) 
-	.pipe(gulp.dest(themeDirectory + paths.assets.css.unminified.root)); 
+	.pipe(gulp.dest(unminified)); 
 });
 
 
@@ -116,21 +128,91 @@ gulp.task( 'compatibilityStyle', function() {
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	.pipe(postcss(postCSSOptions.processors))
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.compatibility ))
-	.pipe(f)
+	.pipe( gulp.dest( unminified + 'compatibility/' ))
+	.pipe(filterAll)
 	.pipe(rtlcss()) 
 	.pipe(rename({ suffix: '-rtl' })) 
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.compatibility )); 
+	.pipe( gulp.dest( unminified + 'compatibility/' )); 
 });
 
 gulp.task( 'woocommerceStyle', function() {
 	gulp.src( themeDirectory + paths.sass.woocommerce + '**.scss' )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.woocommerce ))
-	.pipe(f)
+	.pipe( gulp.dest( unminified + 'compatibility/woocommerce/' ))
+	.pipe(filterAll)
 	.pipe(rtlcss()) 
 	.pipe(rename({ suffix: '-rtl' })) 
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.woocommerce )); 
+	.pipe( gulp.dest( unminified + 'compatibility/woocommerce/' )); 
 });
 
+
+// gulp.task('minify', function(){
+
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// https://fettblog.eu/gulp-recipes-part-1/
+
+// var gulp   = require('gulp');
+// var uglify = require('gulp-uglify');
+// var concat = require('gulp-concat');
+// var rename = require('gulp-rename');
+// // this node module will do the trick
+// var merge  = require('merge2');
+
+// gulp.task('scripts', function() {
+// 	// we use the array map function to map each
+// 	// entry in our configuration array to a function
+// 	var tasks = config.map(function(entry) {
+// 		// the parameter we get is this very entry. In
+// 		// that case, an object containing src, name and
+// 		// dest.
+// 		// So here we create a Gulp stream as we would
+// 		// do if we just handle one set of files
+// 		return gulp.src(entry.src)
+// 			.pipe(concat())
+// 			.pipe(uglify())
+// 			.pipe(rename(entry.name))
+// 			.pipe(gulp.dest(entry.dest))
+// 	});
+// 	// tasks now includes an array of Gulp streams. Use
+// 	// the `merge-stream` module to combine them into one
+// 	return merge(tasks);
+// });
