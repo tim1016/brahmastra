@@ -35,11 +35,11 @@ var filter       = require('gulp-filter');
 // const f = filter(paths.excludeAll); // exclude these files from generating rtlcss
 noRTL = paths.excludeRTL;
 noFontAwesome = paths.excludeFA;
-noFonts = paths.excludeFonts;
-const filterAll = filter(["**/*.css", noRTL, noFontAwesome, noAstraFonts], {restore: true});
+noFontFiles = paths.excludeFonts;
+const filterAll = filter(["**/*.css", noRTL, noFontAwesome, noFontFiles], {restore: true});
 const filterRTL = filter(["**/*.css", noRTL], {restore: true});
 
-
+var themeDirectory       = paths.themeDirectory;
 const unminified = themeDirectory + paths.assets.css.unminified;
 const minified   = themeDirectory + paths.assets.css.minified; 
 
@@ -47,9 +47,6 @@ const minified   = themeDirectory + paths.assets.css.minified;
 //minify CSS using gulp-clean-css
 let minifyCSS    = require('gulp-clean-css');
 
-
-var themeDirectory       = paths.themeDirectory;
-var mapURL  = themeDirectory;
 
 var sassExpanded = {
 	errLogToConsole: true,
@@ -111,6 +108,7 @@ gulp.task( 'editorStyle', function() {
 
 
 gulp.task( 'commonStyle', function() {
+	console.log(unminified);
 	gulp.src( themeDirectory + paths.sass.root + 'style.scss' )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
