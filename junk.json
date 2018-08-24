@@ -1,10 +1,10 @@
 {
     "themeDirectory" : "./rei/wp-content/themes/astra/",
     "rtlExclude" : [
-        "*.css",
-        "!*-rtl.css",
-        "!font-awesome.css",
-        "!astra-fonts.css"
+        "**/*.css",
+        "**/!*-rtl.css",
+        "**/!font-awesome.css",
+        "**/!astra-fonts.css"
     ],
     "customizerFiles": [
         "inc/customizer/custom-controls/responsive/",

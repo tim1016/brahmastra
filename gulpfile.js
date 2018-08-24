@@ -32,6 +32,7 @@ var flexibility     = require('postcss-flexibility');
 //rtlcss
 var rtlcss       = require('gulp-rtlcss');
 var filter       = require('gulp-filter');
+const f = filter(paths.rtlExclude);
 
 
 
@@ -75,7 +76,7 @@ var postCSSOptions =  {
 	]
 }
 // exclude these files from generating rtlcss
-const f = filter(paths.rtlExclude);
+
 
 
 
