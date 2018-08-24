@@ -29,6 +29,9 @@ var postcss		 = require( 'gulp-postcss' );
 var postCSSautoprefixer = require('autoprefixer');
 var flexibility     = require('postcss-flexibility');
 
+//rtlcss
+var rtlcss       = require('gulp-rtlcss');
+var filter       = require('gulp-filter');
 
 
 
@@ -71,6 +74,11 @@ var postCSSOptions =  {
 		postCSSautoprefixer(prefixOptions)
 	]
 }
+// exclude these files from generating rtlcss
+const f = filter(paths.rtlExclude);
+
+
+
 
 
 gulp.task( 'customizerStyles', function() {
@@ -96,12 +104,14 @@ gulp.task( 'editorStyles', function() {
 
 gulp.task( 'commonStyle', function() {
 	gulp.src( themeDirectory + paths.sass.root + 'style.scss' )
-	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	.pipe(postcss(postCSSOptions.processors))
-	// .pipe( sourcemaps.write('../maps') )
-	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.root ) ); 
+	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.root ) )
+	.pipe(f)
+	.pipe(rtlcss()) // Convert to RTL.
+	.pipe(rename({ suffix: '-rtl' })) // Append "-rtl" to the filename.
+	.pipe(gulp.dest(themeDirectory + paths.assets.css.unminified.root)); // Output RTL stylesheets. 
 });
 
 
@@ -123,3 +133,4 @@ gulp.task( 'woocommerceStyle', function() {
 	// .pipe( sourcemaps.write('../maps') )
 	.pipe( gulp.dest( themeDirectory + paths.assets.css.unminified.woocommerce ) ); 
 });
+
