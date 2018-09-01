@@ -210,13 +210,20 @@ gulp.task( 'pluginJS', function() {
 		// .pipe( gulpif( options.has( 'production' ), stripDebug() ) )
 		// .pipe( sourcemaps.init({ loadMaps: true }) )
 		.pipe( uglify() )
+		.pipe(rename({ suffix: '.min' }))
 		// .pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( './' ) );
+		.pipe( gulp.dest( '../minified/' ) );
 		// .pipe( browserSync.stream() );
 	});
 	
 });
 
+// gulp.task('compressjs', function () {
+//     gulp.src(unminifiedJS + '*.js')
+//       .pipe(uglify())
+//       .pipe(rename({ suffix: '.min' }))
+//       .pipe(gulp.dest(minifiedJS))
+// });
 
 
 
