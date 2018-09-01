@@ -30,6 +30,11 @@
         "css"   : {
             "unminified" : "assets/css/unminified/",
             "minified" : "assets/css/minified/"
+        },
+        "jsroot" : "assets/js/",
+        "js"   : {
+            "unminified" : "assets/js/unminified/",
+            "minified" : "assets/js/minified/"
         }
     }
 }

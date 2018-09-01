@@ -96,7 +96,7 @@ gulp.task( 'pluginJS', function() {
 		.pipe( browserSync.stream() );
 	});
 	
- });
+});
 
 function triggerPlumber( src, url ) {
 	return gulp.src( src )

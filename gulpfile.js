@@ -1,6 +1,7 @@
 // Load Gulp...of course
 var gulp         = require( 'gulp' );
 var paths = require('./junk.json');
+// var webpack = require('webpack');
 
 // CSS related plugins
 var sass         = require( 'gulp-sass' );
@@ -23,6 +24,7 @@ var notify       = require( 'gulp-notify' );
 var plumber      = require( 'gulp-plumber' );
 var options      = require( 'gulp-options' );
 var gulpif       = require( 'gulp-if' );
+var glob 		 = require( 'glob' );
 
 //postCSS specific
 var postcss		 = require( 'gulp-postcss' );
@@ -41,9 +43,14 @@ const filterRTL = filter(["**/*.css", noRTL], {restore: true});
 const filterRTL2 = filter(["*.css", noRTL], {restore: true});
 
 var themeDirectory       = paths.themeDirectory;
-const unminified = themeDirectory + paths.assets.css.unminified;
-const minified   = themeDirectory + paths.assets.css.minified; 
+const unminifiedCSS = themeDirectory + paths.assets.css.unminified;
+const minifiedCSS   = themeDirectory + paths.assets.css.minified; 
 
+
+const unminifiedJS = themeDirectory + paths.assets.js.unminified;
+const minifiedJS   = themeDirectory + paths.assets.js.minified; 
+const jsAssets		= themeDirectory + paths.assets.jsroot; 
+var fileList = glob.sync(unminifiedJS + '**.js')
 
 //minify CSS using gulp-clean-css
 let minifyCSS    = require('gulp-clean-css');
@@ -109,16 +116,16 @@ gulp.task( 'editorStyle', function() {
 
 
 gulp.task( 'commonStyle', function() {
-	console.log(unminified);
+	console.log(unminifiedCSS);
 	gulp.src( themeDirectory + paths.sass.root + 'style.scss' )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	.pipe(postcss(postCSSOptions.processors))
-	.pipe( gulp.dest(unminified))
+	.pipe( gulp.dest(unminifiedCSS))
 	.pipe(filterAll)
 	.pipe(rtlcss()) 
 	.pipe(rename({ suffix: '-rtl' })) 
-	.pipe(gulp.dest(unminified)); 
+	.pipe(gulp.dest(unminifiedCSS)); 
 });
 
 
@@ -127,27 +134,27 @@ gulp.task( 'compatibilityStyle', function() {
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
 	.pipe(postcss(postCSSOptions.processors))
-	.pipe( gulp.dest( unminified + 'compatibility/' ))
+	.pipe( gulp.dest( unminifiedCSS + 'compatibility/' ))
 	.pipe(filterAll)
 	.pipe(rtlcss()) 
 	.pipe(rename({ suffix: '-rtl' })) 
-	.pipe( gulp.dest( unminified + 'compatibility/' )); 
+	.pipe( gulp.dest( unminifiedCSS + 'compatibility/' )); 
 });
 
 gulp.task( 'woocommerceStyle', function() {
 	gulp.src( themeDirectory + paths.sass.woocommerce + '**.scss' )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
-	.pipe( gulp.dest( unminified + 'compatibility/woocommerce/' ))
+	.pipe( gulp.dest( unminifiedCSS + 'compatibility/woocommerce/' ))
 	.pipe(filterAll)
 	.pipe(rtlcss()) 
 	.pipe(rename({ suffix: '-rtl' })) 
-	.pipe( gulp.dest( unminified + 'compatibility/woocommerce/' )); 
+	.pipe( gulp.dest( unminifiedCSS + 'compatibility/woocommerce/' )); 
 });
 
 
 gulp.task('minify', function(){
-	gulp.src([unminified + "**/*.css", unminified + "*.css"])
+	gulp.src([unminifiedCSS + "**/*.css", unminifiedCSS + "*.css"])
 	// .pipe(filterRTL)
 	// .pipe(filterRTL2)
 	.pipe(minifyCSS())
@@ -156,10 +163,59 @@ gulp.task('minify', function(){
 		opt.basename = opt.basename.replace("-rtl.min", ".min-rtl");
 		return opt;
 	  }))
-	.pipe(gulp.dest(minified));
+	.pipe(gulp.dest(minifiedCSS));
 });
 
 
+gulp.task( 'scripts', function() {
+
+	jsFiles.map(function(entry){
+		return browserify({
+			entries: [unminifiedJS + entry]
+		})
+		.transform( babelify, { presets: [ 'env' ] } )
+		.bundle()
+		.pipe( source( entry ) )
+		.pipe( buffer() )
+		// .pipe( gulpif( options.has( 'production' ), stripDebug() ) )
+		// .pipe( sourcemaps.init({ loadMaps: true }) )
+		.pipe( uglify() )
+		// .pipe( sourcemaps.write( '.' ) )
+		.pipe( gulp.dest( minifiedJS ) )
+		// .pipe( browserSync.stream() );
+	});
+	
+});
+
+gulp.task('browserify', function() {
+	// console.log (fileList);
+	return browserify([unminifiedJS + '**.js'])
+	.bundle()
+	.pipe(source('bundle.js')) // gives streaming vinyl file object
+	.pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
+	.pipe(uglify()) // now gulp-uglify works 
+	.pipe(gulp.dest(minifiedJS));
+});
+
+gulp.task( 'pluginJS', function() {
+
+	fileList.map(function(entry){
+		return browserify({
+			entries: entry
+		})
+		// .transform( babelify, { presets: [ 'env' ] } )	
+		.bundle()
+		.pipe( source( entry ) )
+		.pipe( buffer() )
+		// .pipe( gulpif( options.has( 'production' ), stripDebug() ) )
+		// .pipe( sourcemaps.init({ loadMaps: true }) )
+		.pipe( uglify() )
+		// .pipe( sourcemaps.write( '.' ) )
+		.pipe( gulp.dest( minifiedJS ) );
+		// .pipe( browserSync.stream() );
+	});
+	
+});
 
 
 
