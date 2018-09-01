@@ -211,7 +211,7 @@ gulp.task( 'pluginJS', function() {
 		// .pipe( sourcemaps.init({ loadMaps: true }) )
 		.pipe( uglify() )
 		// .pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( '../minified/' ) );
+		.pipe( gulp.dest( './' ) );
 		// .pipe( browserSync.stream() );
 	});
 	
