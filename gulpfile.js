@@ -230,10 +230,10 @@ gulp.task('concatenateJS', function() {
 	let jsConcatFullPath = jsConcat.map(file => {
 		return themeDirectory + file;
 	});
-	console.log(jsConcatFullPath);
-	// return gulp.src('./lib/*.js')
-	//   .pipe(concat('all.js'))
-	//   .pipe(gulp.dest('./dist/'));
+	const srcBase = themeDirectory + paths.assets.jsroot;
+	return gulp.src(jsConcatFullPath, {base: srcBase})
+	  .pipe(concat('style.min.js'))
+	  .pipe(gulp.dest(minifiedJS));
 });
 
 
