@@ -153,7 +153,7 @@ gulp.task('minify', function(){
 	.pipe(minifyCSS())
 	.pipe(rename({suffix: '.min'}))
 	.pipe(rename(function(opt) {
-		opt.basename = opt.basename.replace('-rtl.min', '.min-rtl');
+		opt.basename = opt.basename.replace("-rtl.min", ".min-rtl");
 		return opt;
 	  }))
 	.pipe(gulp.dest(minified));
