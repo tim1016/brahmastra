@@ -148,8 +148,8 @@ gulp.task( 'woocommerceStyle', function() {
 
 gulp.task('minify', function(){
 	gulp.src([unminified + "**/*.css", unminified + "*.css"])
-	// .pipe(filterRTL)
-	// .pipe(filterRTL2)
+	.pipe(filterRTL)
+	.pipe(filterRTL2)
 	.pipe(minifyCSS())
 	.pipe(rename({suffix: '.min'}))
 	.pipe(rename(function(opt) {
