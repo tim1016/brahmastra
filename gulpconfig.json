@@ -1,24 +1,46 @@
 {
-    "browserSyncOptions" : {
-        "proxy" : "http://rei.test",
-        "notify": true
-    },
-    "themeDir" : "./rei/wp-content/themes/astra/",
-    "browserSyncWatchFiles" : [
-        "./rei/wp-content/themes/astra/css/*.min.css",
-        "./rei/wp-content/themes/astra/js/*.min.js",
-        "./rei/wp-content/themes/astra/**/*.php"
+    "version" : "1.0.0",
+    "themeDirectory" : "./rei/wp-content/themes/astra/",
+    "excludeRTL" : "**/!*-rtl.css",
+    "excludeFA" :  "**/!font-awesome.css",
+    "excludeFonts" : "**/!astra-fonts.css",
+    "customizerFiles": [
+        "inc/customizer/custom-controls/responsive/",
+        "inc/customizer/custom-controls/divider/",
+        "inc/customizer/custom-controls/heading/",
+        "inc/customizer/custom-controls/description/",
+        "inc/customizer/custom-controls/radio-image/",
+        "inc/customizer/custom-controls/slider/",
+        "inc/customizer/custom-controls/sortable/",
+        "inc/customizer/custom-controls/spacing/",
+        "inc/customizer/custom-controls/responsive-spacing/"
     ],
-    "paths" : {
-        "js": "./rei/wp-content/themes/astra/js",
-        "css": "./rei/wp-content/themes/astra/css",
-        "img": "./rei/wp-content/themes/astra/img",
-        "imgsrc": "./rei/wp-content/themes/astra/src/img",
-        "sass": "./rei/wp-content/themes/astra/sass",
-        "node": "./node_modules/",
-        "bower": "./bower_components/", 
-        "dev": "./rei/wp-content/themes/astra/src",
-        "dist": "./rei/wp-content/themes/astra/dist",
-        "vendor": ""
+    "editorFiles" : {
+        "src": "sass/editor-style.scss",
+        "dest": "assets/css/unminified/"
+    },
+    "sass" : {
+        "root" : "sass/",
+        "site" : "sass/site/",
+        "compatibility" : "sass/site/compatibility/",
+        "woocommerce"   : "sass/site/compatibility/woocommerce/"
+    },
+    "assets": {
+        "root": "assets/",
+        "cssroot" : "assets/css/",
+        "css"   : {
+            "unminified" : "assets/css/unminified/",
+            "minified" : "assets/css/minified/"
+        },
+        "jsroot" : "assets/js/",
+        "js"   : {
+            "unminified" : "assets/js/unminified/",
+            "minified" : "assets/js/minified/"
+        },
+        "jsconcat" : [
+            "assets/js/minified/navigation.min.js",
+            "assets/js/minified/skip-link-focus-fix.min.js",
+            "assets/js/minified/custom-events-polyfill.js"
+        ]
     }
 }

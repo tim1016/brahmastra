@@ -1,6 +1,6 @@
 {
   "name": "brahmastra",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Customization of astra for real estate websites",
   "main": "gulpfile.js",
   "dependencies": {
@@ -40,6 +40,7 @@
     "grunt-wp-i18n": "^1.0.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
+    "gulp-bump": "^3.1.1",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^3.10.0",
     "gulp-compress": "0.0.9",

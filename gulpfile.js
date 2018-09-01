@@ -1,6 +1,6 @@
 // Load Gulp...of course
 var gulp         = require( 'gulp' );
-var paths = require('./junk.json');
+var paths = require('./gulpconfig.json');
 // var webpack = require('webpack');
 
 // CSS related plugins
@@ -34,7 +34,8 @@ var flexibility     = require('postcss-flexibility');
 //rtlcss
 var rtlcss       = require('gulp-rtlcss');
 var filter       = require('gulp-filter');
-// const f = filter(paths.excludeAll); // exclude these files from generating rtlcss
+const versionUp  = require('gulp-bump')
+
 noRTL = paths.excludeRTL;
 noFontAwesome = paths.excludeFA;
 noFontFiles = paths.excludeFonts;
@@ -235,6 +236,13 @@ gulp.task('concatenateJS', function() {
 	  .pipe(concat('style.min.js'))
 	  .pipe(gulp.dest(minifiedJS));
 });
+
+
+gulp.task('bump', function(){
+	gulp.src(themeDirectory + 'package.json')
+	.pipe(bump())
+	.pipe(gulp.dest());
+  });
 
 
 
