@@ -239,9 +239,9 @@ gulp.task('concatenateJS', function() {
 
 
 gulp.task('bumpup', function(){
-	gulp.src(themeDirectory + 'package.json')
+	gulp.src('./package.json')
 	.pipe(bump())
-	.pipe(gulp.dest());
+	.pipe(gulp.dest('./'));
   });
 
 
