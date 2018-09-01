@@ -34,7 +34,7 @@ var flexibility     = require('postcss-flexibility');
 //rtlcss
 var rtlcss       = require('gulp-rtlcss');
 var filter       = require('gulp-filter');
-const versionUp  = require('gulp-bump')
+const bump       = require('gulp-bump')
 
 noRTL = paths.excludeRTL;
 noFontAwesome = paths.excludeFA;
@@ -238,7 +238,7 @@ gulp.task('concatenateJS', function() {
 });
 
 
-gulp.task('bump', function(){
+gulp.task('bumpup', function(){
 	gulp.src(themeDirectory + 'package.json')
 	.pipe(bump())
 	.pipe(gulp.dest());
