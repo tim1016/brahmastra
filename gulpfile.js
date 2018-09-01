@@ -38,6 +38,7 @@ noFontAwesome = paths.excludeFA;
 noFontFiles = paths.excludeFonts;
 const filterAll = filter(["**/*.css", noRTL, noFontAwesome, noFontFiles], {restore: true});
 const filterRTL = filter(["**/*.css", noRTL], {restore: true});
+const filterRTL2 = filter(["*.css", noRTL], {restore: true});
 
 var themeDirectory       = paths.themeDirectory;
 const unminified = themeDirectory + paths.assets.css.unminified;
@@ -145,9 +146,18 @@ gulp.task( 'woocommerceStyle', function() {
 });
 
 
-// gulp.task('minify', function(){
-
-// });
+gulp.task('minify', function(){
+	gulp.src([unminified + "**/*.css", unminified + "*.css"])
+	// .pipe(filterRTL)
+	// .pipe(filterRTL2)
+	.pipe(minifyCSS())
+	.pipe(rename({suffix: '.min'}))
+	.pipe(rename(function(opt) {
+		opt.basename = opt.basename.replace(/-rtl.min/, /.min-rtl/);
+		return opt;
+	  }))
+	.pipe(gulp.dest(minified));
+});
 
 
 
