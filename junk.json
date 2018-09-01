@@ -35,6 +35,11 @@
         "js"   : {
             "unminified" : "assets/js/unminified/",
             "minified" : "assets/js/minified/"
-        }
+        },
+        "jsconcat" : [
+            "assets/js/minified/navigation.min.js",
+            "assets/js/minified/skip-link-focus-fix.min.js",
+            "assets/js/minified/custom-events-polyfill.js"
+        ]
     }
 }

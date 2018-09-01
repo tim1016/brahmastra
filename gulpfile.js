@@ -50,6 +50,7 @@ const minifiedCSS   = themeDirectory + paths.assets.css.minified;
 const unminifiedJS = themeDirectory + paths.assets.js.unminified;
 const minifiedJS   = themeDirectory + paths.assets.js.minified; 
 const jsAssets		= themeDirectory + paths.assets.jsroot; 
+var jsConcat       = paths.assets.jsconcat;
 var fileList = glob.sync(unminifiedJS + '**.js')
 
 //minify CSS using gulp-clean-css
@@ -197,33 +198,43 @@ gulp.task('browserify', function() {
 	.pipe(gulp.dest(minifiedJS));
 });
 
-gulp.task( 'pluginJS', function() {
+// gulp.task( 'pluginJS', function() {
 
-	fileList.map(function(entry){
-		return browserify({
-			entries: entry
-		})
-		// .transform( babelify, { presets: [ 'env' ] } )	
-		.bundle()
-		.pipe( source( entry ) )
-		.pipe( buffer() )
-		// .pipe( gulpif( options.has( 'production' ), stripDebug() ) )
-		// .pipe( sourcemaps.init({ loadMaps: true }) )
-		.pipe( uglify() )
-		.pipe(rename({ suffix: '.min' }))
-		// .pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( minifiedJS ) );
-		// .pipe( browserSync.stream() );
-	});
+// 	fileList.map(function(entry){
+// 		return browserify({
+// 			entries: entry
+// 		})
+// 		// .transform( babelify, { presets: [ 'env' ] } )	
+// 		.bundle()
+// 		.pipe( source( entry ) )
+// 		.pipe( buffer() )
+// 		// .pipe( gulpif( options.has( 'production' ), stripDebug() ) )
+// 		// .pipe( sourcemaps.init({ loadMaps: true }) )
+// 		.pipe( uglify() )
+// 		.pipe(rename({ suffix: '.min' }))
+// 		// .pipe( sourcemaps.write( '.' ) )
+// 		.pipe( gulp.dest( minifiedJS ) );
+// 		// .pipe( browserSync.stream() );
+// 	});
 	
+// });
+
+gulp.task('compressjs', function () {
+    gulp.src(unminifiedJS + '*.js')
+      .pipe(uglify())
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(gulp.dest(minifiedJS))
 });
 
-// gulp.task('compressjs', function () {
-//     gulp.src(unminifiedJS + '*.js')
-//       .pipe(uglify())
-//       .pipe(rename({ suffix: '.min' }))
-//       .pipe(gulp.dest(minifiedJS))
-// });
+gulp.task('concatenateJS', function() {
+	let jsConcatFullPath = jsConcat.map(file => {
+		return themeDirectory + file;
+	});
+	console.log(jsConcatFullPath);
+	// return gulp.src('./lib/*.js')
+	//   .pipe(concat('all.js'))
+	//   .pipe(gulp.dest('./dist/'));
+});
 
 
 
