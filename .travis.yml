@@ -2,9 +2,9 @@ language: php
 php:
  - 7.0
 
- before-script:
- composer install 
- npm install
+before_script:
+- composer install 
+- npm install
 
 
 
