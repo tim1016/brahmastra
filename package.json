@@ -60,6 +60,7 @@
     "gulp-svg-sprite": "^1.4.0",
     "gulp-uglify": "^3.0.1",
     "gulp-uglifycss": "^1.1.0",
+    "gulp-wp-pot": "^2.3.2",
     "node-sass": "^4.9.3",
     "postcss-flexibility": "^2.0.0",
     "svg2png": "^4.1.1",

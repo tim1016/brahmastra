@@ -202,3 +202,6 @@ gulp.task('phpConstants', function(){
 	.pipe(replace(/ASTRA_THEME_VERSION', '.*?'/g, newVersion))
 	.pipe(gulp.dest(themeDirectory));
 });
+
+
+
