@@ -1,6 +1,8 @@
 // Load Gulp...of course
 var gulp         = require( 'gulp' );
 var paths = require('./gulpconfig.json');
+var pkg = require('./package.json');
+
 // var webpack = require('webpack');
 
 // CSS related plugins
@@ -31,17 +33,18 @@ var postcss		 = require( 'gulp-postcss' );
 var postCSSautoprefixer = require('autoprefixer');
 var flexibility     = require('postcss-flexibility');
 
+
 //rtlcss
 var rtlcss       = require('gulp-rtlcss');
 var filter       = require('gulp-filter');
-const bump       = require('gulp-bump')
+const bump       = require('gulp-bump');
+const replace	= require('gulp-replace');
+
 
 noRTL = paths.excludeRTL;
 noFontAwesome = paths.excludeFA;
 noFontFiles = paths.excludeFonts;
 const filterAll = filter(["**/*.css", noRTL, noFontAwesome, noFontFiles], {restore: true});
-const filterRTL = filter(["**/*.css", noRTL], {restore: true});
-const filterRTL2 = filter(["*.css", noRTL], {restore: true});
 
 var themeDirectory       = paths.themeDirectory;
 const unminifiedCSS = themeDirectory + paths.assets.css.unminified;
@@ -53,6 +56,9 @@ const minifiedJS   = themeDirectory + paths.assets.js.minified;
 const jsAssets		= themeDirectory + paths.assets.jsroot; 
 var jsConcat       = paths.assets.jsconcat;
 var fileList = glob.sync(unminifiedJS + '**.js')
+
+
+oldVersion = pkg.version;
 
 //minify CSS using gulp-clean-css
 let minifyCSS    = require('gulp-clean-css');
@@ -77,13 +83,6 @@ var prefixOptions = {
 	],
 	cascade: false
 };
-
-// var prefixOptions = {
-// 	browsers: [
-// 		'last 10 versions'
-// 	],
-// 	cascade: false
-// };
 
 var postCSSOptions =  {
 	map: false,
@@ -118,7 +117,6 @@ gulp.task( 'editorStyle', function() {
 
 
 gulp.task( 'commonStyle', function() {
-	console.log(unminifiedCSS);
 	gulp.src( themeDirectory + paths.sass.root + 'style.scss' )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
@@ -157,8 +155,6 @@ gulp.task( 'woocommerceStyle', function() {
 
 gulp.task('minify', function(){
 	gulp.src([unminifiedCSS + "**/*.css", unminifiedCSS + "*.css"])
-	// .pipe(filterRTL)
-	// .pipe(filterRTL2)
 	.pipe(minifyCSS())
 	.pipe(rename({suffix: '.min'}))
 	.pipe(rename(function(opt) {
@@ -168,57 +164,6 @@ gulp.task('minify', function(){
 	.pipe(gulp.dest(minifiedCSS));
 });
 
-
-gulp.task( 'scripts', function() {
-
-	jsFiles.map(function(entry){
-		return browserify({
-			entries: [unminifiedJS + entry]
-		})
-		.transform( babelify, { presets: [ 'env' ] } )
-		.bundle()
-		.pipe( source( entry ) )
-		.pipe( buffer() )
-		// .pipe( gulpif( options.has( 'production' ), stripDebug() ) )
-		// .pipe( sourcemaps.init({ loadMaps: true }) )
-		.pipe( uglify() )
-		// .pipe( sourcemaps.write( '.' ) )
-		.pipe( gulp.dest( minifiedJS ) )
-		// .pipe( browserSync.stream() );
-	});
-	
-});
-
-gulp.task('browserify', function() {
-	// console.log (fileList);
-	return browserify([unminifiedJS + '**.js'])
-	.bundle()
-	.pipe(source('bundle.js')) // gives streaming vinyl file object
-	.pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
-	.pipe(uglify()) // now gulp-uglify works 
-	.pipe(gulp.dest(minifiedJS));
-});
-
-// gulp.task( 'pluginJS', function() {
-
-// 	fileList.map(function(entry){
-// 		return browserify({
-// 			entries: entry
-// 		})
-// 		// .transform( babelify, { presets: [ 'env' ] } )	
-// 		.bundle()
-// 		.pipe( source( entry ) )
-// 		.pipe( buffer() )
-// 		// .pipe( gulpif( options.has( 'production' ), stripDebug() ) )
-// 		// .pipe( sourcemaps.init({ loadMaps: true }) )
-// 		.pipe( uglify() )
-// 		.pipe(rename({ suffix: '.min' }))
-// 		// .pipe( sourcemaps.write( '.' ) )
-// 		.pipe( gulp.dest( minifiedJS ) );
-// 		// .pipe( browserSync.stream() );
-// 	});
-	
-// });
 
 gulp.task('compressjs', function () {
     gulp.src(unminifiedJS + '*.js')
@@ -238,71 +183,22 @@ gulp.task('concatenateJS', function() {
 });
 
 
-gulp.task('bumpup', function(){
+gulp.task('bumpPackageJSON', function(){
 	gulp.src('./package.json')
 	.pipe(bump())
 	.pipe(gulp.dest('./'));
-  });
+});
 
+gulp.task('bumpWPtheme', function(){
+	gulp.src(themeDirectory + 'style.css')
+	.pipe(bump())
+	.pipe(gulp.dest(themeDirectory));
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// https://fettblog.eu/gulp-recipes-part-1/
-
-// var gulp   = require('gulp');
-// var uglify = require('gulp-uglify');
-// var concat = require('gulp-concat');
-// var rename = require('gulp-rename');
-// // this node module will do the trick
-// var merge  = require('merge2');
-
-// gulp.task('scripts', function() {
-// 	// we use the array map function to map each
-// 	// entry in our configuration array to a function
-// 	var tasks = config.map(function(entry) {
-// 		// the parameter we get is this very entry. In
-// 		// that case, an object containing src, name and
-// 		// dest.
-// 		// So here we create a Gulp stream as we would
-// 		// do if we just handle one set of files
-// 		return gulp.src(entry.src)
-// 			.pipe(concat())
-// 			.pipe(uglify())
-// 			.pipe(rename(entry.name))
-// 			.pipe(gulp.dest(entry.dest))
-// 	});
-// 	// tasks now includes an array of Gulp streams. Use
-// 	// the `merge-stream` module to combine them into one
-// 	return merge(tasks);
-// });
+gulp.task('phpConstants', function(){
+	pkg = require('./package.json');
+	newVersion = 'ASTRA_THEME_VERSION\', \'' + pkg.version + '\'';
+	gulp.src(themeDirectory + 'functions.php')
+	.pipe(replace(/ASTRA_THEME_VERSION', '.*?'/g, newVersion))
+	.pipe(gulp.dest(themeDirectory));
+});
