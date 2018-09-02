@@ -36,7 +36,6 @@
 .customize-control-ast-responsive .input-wrapper input {
   display: none;
   width: -webkit-calc(100% - 52px);
-  width: -moz-calc(100% - 52px);
   width: calc(100% - 52px);
   float: left;
 }
@@ -64,5 +63,3 @@
 .customize-control-ast-responsive .input-wrapper .ast-non-reponsive.ast-responsive-select {
   display: inline-block;
 }
-
-/*# sourceMappingURL=../maps/responsive.css.map */

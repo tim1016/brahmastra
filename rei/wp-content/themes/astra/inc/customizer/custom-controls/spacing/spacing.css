@@ -14,8 +14,8 @@
   -webkit-box-flex: 1;
   -ms-flex: auto;
   -webkit-flex: auto;
-     -moz-box-flex: 1;
-          flex: auto;
+  -moz-box-flex: 1;
+  flex: auto;
 }
 
 .customize-control-ast-spacing span.ast-spacing-unit {
@@ -33,5 +33,3 @@
 .customize-control-ast-spacing input.ast-spacing-input {
   text-align: center;
 }
-
-/*# sourceMappingURL=../maps/spacing.css.map */

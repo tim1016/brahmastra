@@ -446,6 +446,7 @@ body .llms-course-progress {
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
+  -js-display: flex;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;

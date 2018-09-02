@@ -109,7 +109,7 @@ var postCSSOptions =  {
 
 
 
-gulp.task( 'customizerStyle', function() {
+gulp.task( 'customizerSass', function() {
     for (i = 0; i < paths.customizerFiles.length; i++) { 
 		gulp.src( themeDirectory + paths.customizerFiles[i] + '*.scss' )
 		.pipe( sass(sassExpanded).on('error', sass.logError))
@@ -118,7 +118,7 @@ gulp.task( 'customizerStyle', function() {
     }
 });
 
-gulp.task( 'editorStyle', function() {
+gulp.task( 'editorSass', function() {
 	gulp.src( themeDirectory + paths.editorFiles.src )
 	// .pipe( sourcemaps.init() )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
@@ -132,7 +132,7 @@ gulp.task( 'editorStyle', function() {
 });
 
 
-gulp.task( 'commonStyle', function() {
+gulp.task( 'commonSass', function() {
 	gulp.src( themeDirectory + paths.sass.root + 'style.scss' )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
@@ -145,7 +145,7 @@ gulp.task( 'commonStyle', function() {
 });
 
 
-gulp.task( 'compatibilityStyle', function() {
+gulp.task( 'compatibilitySass', function() {
 	gulp.src( themeDirectory + paths.sass.compatibility + '**.scss' )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
@@ -157,7 +157,7 @@ gulp.task( 'compatibilityStyle', function() {
 	.pipe( gulp.dest( unminifiedCSS + 'compatibility/' )); 
 });
 
-gulp.task( 'woocommerceStyle', function() {
+gulp.task( 'woocommerceSass', function() {
 	gulp.src( themeDirectory + paths.sass.woocommerce + '**.scss' )
 	.pipe( sass(sassExpanded).on('error', sass.logError))  
 	.pipe( autoprefixer(prefixOptions) )
@@ -181,7 +181,7 @@ gulp.task('minify', function(){
 });
 
 
-gulp.task('compressjs', function () {
+gulp.task('compressJS', function () {
     gulp.src(unminifiedJS + '*.js')
       .pipe(uglify())
       .pipe(rename({ suffix: '.min' }))
@@ -251,9 +251,16 @@ gulp.task('fonts', function(){
 			//=> 'Internal server error ...'
 		}
 	})();
-
-
-
 });
 
+
+gulp.task('allSass', ['customizerSass', 'editorSass', 'commonSass', 'compatibilitySass', 'woocommerceSass']);
+
+gulp.task('styles', ['allSass', 'minify']);
+
+gulp.task('scripts', ['compressJS', 'concatenateJS']);
+
+gulp.task('compileAssets', ['styles', 'scripts']);
+
+gulp.task('versionUp', ['bumpPackageJSON', 'bumpWPtheme', 'phpConstants']);
 
