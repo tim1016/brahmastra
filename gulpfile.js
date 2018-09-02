@@ -2,6 +2,8 @@
 var gulp         = require( 'gulp' );
 var paths = require('./gulpconfig.json');
 var pkg = require('./package.json');
+var fs = require('fs-extra');
+var got = require('got');
 
 // var webpack = require('webpack');
 
@@ -39,6 +41,8 @@ var rtlcss       = require('gulp-rtlcss');
 var filter       = require('gulp-filter');
 const bump       = require('gulp-bump');
 const replace	= require('gulp-replace');
+
+const wpPot 	= require('gulp-wp-pot');
 
 
 noRTL = paths.excludeRTL;
@@ -91,6 +95,18 @@ var postCSSOptions =  {
 		postCSSautoprefixer(prefixOptions)
 	]
 }
+
+// var potOptions = {
+// 	domain: '/',
+// 	destFile: 'languages/astra.pot',
+// 	potHeaders: {
+// 		poedit: true,
+// 		'x-poedit-keywordslist': true
+// 	},
+// 	type: 'wp-theme',
+// 	updateTimestamp: true
+// }
+
 
 
 gulp.task( 'customizerStyle', function() {
@@ -203,5 +219,49 @@ gulp.task('phpConstants', function(){
 	.pipe(gulp.dest(themeDirectory));
 });
 
+
+gulp.task('fonts', function(){
+	
+	let googleApi = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyArUrvacsexShNpBZ9dxNTRR97bY6f0JCk';
+	// request('https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyArUrvacsexShNpBZ9dxNTRR97bY6f0JCk', function (error, response, body) {
+
+	// 	if (response && response.statusCode == 200) {
+	// 		console.log('Status code: '+ response.statusCode + ' Response: ' + response );
+
+	// 		var fonts = JSON.parse(body).items.map(function (font) {
+	// 			return {
+	// 				[font.family] : {
+	// 					'variants' : font.variants,
+	// 					'category' : font.category
+	// 				}
+	// 			};
+	// 		})
+
+	// 		fs.writeFile('assets/fonts/google-fonts.json', JSON.stringify(fonts, undefined, 4), function (err) {
+	// 			if (! err ) {
+	// 				console.log("Google Fonts Updated!");
+	// 			}
+	// 		});
+	// 	}
+	// 	else{
+	// 		console.log('Status code: '+ response.statusCode + ' Response: ' + response );
+	// 	}
+
+	// });
+
+	(async () => {
+		try {
+			const response = await got(googleApi);
+			console.log(response.body);
+			//=> '<!doctype html> ...'
+		} catch (error) {
+			console.log(error.response.body);
+			//=> 'Internal server error ...'
+		}
+	})();
+
+
+
+});
 
 
