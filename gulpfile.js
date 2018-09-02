@@ -223,32 +223,8 @@ gulp.task('phpConstants', function(){
 gulp.task('fonts', function(){
 	
 	let googleApi = 'https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyArUrvacsexShNpBZ9dxNTRR97bY6f0JCk';
-	// request('https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyArUrvacsexShNpBZ9dxNTRR97bY6f0JCk', function (error, response, body) {
-
-	// 	if (response && response.statusCode == 200) {
-	// 		console.log('Status code: '+ response.statusCode + ' Response: ' + response );
-
-	// 		var fonts = JSON.parse(body).items.map(function (font) {
-	// 			return {
-	// 				[font.family] : {
-	// 					'variants' : font.variants,
-	// 					'category' : font.category
-	// 				}
-	// 			};
-	// 		})
-
-	// 		fs.writeFile('assets/fonts/google-fonts.json', JSON.stringify(fonts, undefined, 4), function (err) {
-	// 			if (! err ) {
-	// 				console.log("Google Fonts Updated!");
-	// 			}
-	// 		});
-	// 	}
-	// 	else{
-	// 		console.log('Status code: '+ response.statusCode + ' Response: ' + response );
-	// 	}
-
-	// });
-
+	let fileName = themeDirectory + paths.assets.googleFonts;
+	
 	(async () => {
 		try {
 			const response = await got(googleApi);
@@ -262,26 +238,14 @@ gulp.task('fonts', function(){
 					}
 				};
 			})
-
-			// console.log(fonts);
-
-			// fs.writeFile('assets/fonts/google-fonts.json', JSON.stringify(fonts, undefined, 4), function (err) {
-			// 	if (! err ) {
-			// 		console.log("Google Fonts Updated!");
-			// 	}
-			// });
-
-			// With Promises:
-			let fileName = themeDirectory + 'assets/fonts/google-fonts.json';
 			fs.writeJson(fileName, fonts)
 			.then(() => {
-			console.log('success!')
+				console.log('success!')
 			})
 			.catch(err => {
-			console.error(err)
+				console.error(err)
 			})
-
-			
+	
 		} catch (error) {
 			console.log(error.response.body);
 			//=> 'Internal server error ...'
