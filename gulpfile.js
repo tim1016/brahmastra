@@ -252,8 +252,36 @@ gulp.task('fonts', function(){
 	(async () => {
 		try {
 			const response = await got(googleApi);
-			console.log(response.body);
-			//=> '<!doctype html> ...'
+			// console.log(response.body);
+
+			var fonts = JSON.parse(response.body).items.map(function (font) {
+				return {
+					[font.family] : {
+						'variants' : font.variants,
+						'category' : font.category
+					}
+				};
+			})
+
+			// console.log(fonts);
+
+			// fs.writeFile('assets/fonts/google-fonts.json', JSON.stringify(fonts, undefined, 4), function (err) {
+			// 	if (! err ) {
+			// 		console.log("Google Fonts Updated!");
+			// 	}
+			// });
+
+			// With Promises:
+			let fileName = themeDirectory + 'assets/fonts/google-fonts.json';
+			fs.writeJson(fileName, fonts)
+			.then(() => {
+			console.log('success!')
+			})
+			.catch(err => {
+			console.error(err)
+			})
+
+			
 		} catch (error) {
 			console.log(error.response.body);
 			//=> 'Internal server error ...'
