@@ -132,3 +132,9 @@ if ( version_compare( PHP_VERSION, '5.3', '>=' ) ) {
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-filters.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-hooks.php';
 require_once ASTRA_THEME_DIR . 'inc/core/deprecated/deprecated-functions.php';
+
+
+add_action('astra_primary_content_top', 'echothis');
+function echothis(){
+	echo '<h1>' . 'Hi How are you doing? ' . '</h1>';
+}

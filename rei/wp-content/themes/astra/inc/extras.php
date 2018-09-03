@@ -116,7 +116,8 @@ if ( ! function_exists( 'astra_number_pagination' ) ) {
 	 * @since 1.0.0
 	 * @return void            Generate & echo pagination markup.
 	 */
-	function astra_number_pagination() {
+	
+	 function astra_number_pagination() {
 		global $numpages;
 		$enabled = apply_filters( 'astra_pagination_enabled', true );
 
