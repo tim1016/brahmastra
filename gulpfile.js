@@ -1,2 +1,2 @@
 require('./gulp/tasks/theme');
-require('./gulp/tasks/plugin');`	`
+require('./gulp/tasks/plugin');
