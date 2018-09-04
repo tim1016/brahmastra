@@ -42,8 +42,9 @@ var filter       = require('gulp-filter');
 const bump       = require('gulp-bump');
 const replace	= require('gulp-replace');
 
-const wpPot 	= require('gulp-wp-pot');
+// const wpPot 	= require('gulp-wp-pot');
 
+var browserSync  = require( 'browser-sync' ).create();
 
 noRTL = paths.excludeRTL;
 noFontAwesome = paths.excludeFA;
@@ -61,6 +62,11 @@ const jsAssets		= themeDirectory + paths.assets.jsroot;
 var jsConcat       = paths.assets.jsconcat;
 var fileList = glob.sync(unminifiedJS + '**.js')
 
+
+var styleWatch   = themeDirectory + '/sass/**/*.scss';
+var jsWatch      = themeDirectory + '/assets/js/unminified/*.js';
+var phpWatch     = themeDirectory + '/../**/*.php';
+var projectURL		= paths.projectURL;
 
 oldVersion = pkg.version;
 
@@ -242,4 +248,20 @@ gulp.task('styles', ['allSass', 'minify']);
 gulp.task('scripts', ['compressJS', 'concatenateJS']);
 gulp.task('compileAssets', ['styles', 'scripts']);
 gulp.task('versionUp', ['bumpPackageJSON', 'bumpWPtheme', 'phpConstants']);
+
+
+gulp.task( 'watchLive', function() {
+	console.log(projectURL);
+	browserSync.init({
+		proxy: projectURL,
+		injectChanges: true,
+		open: false
+	});
+});
+
+gulp.task( 'watchTheme', ['compileAssets', 'watchLive'], function() {
+	gulp.watch( phpWatch, browserSync.reload );
+	gulp.watch( styleWatch, [ 'styles', browserSync.reload ] );
+	gulp.watch( jsWatch, [ 'pluginJS', browserSync.reload ] );
+});
 
