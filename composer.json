@@ -1,4 +1,8 @@
 {
+    "name": "REI Theme",
+    "type": "Wordpress",
+    "license": "GPL v3+",
+    "description": "demo repo",
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4",
         "squizlabs/php_codesniffer": "^3.2",
