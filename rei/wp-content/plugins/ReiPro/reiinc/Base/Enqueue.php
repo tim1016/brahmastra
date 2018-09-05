@@ -23,6 +23,8 @@ class Enqueue extends BaseController{
     public  function enqueueFrontEnd(){
         wp_enqueue_style('frontEndStyle', $this->plugin_url . 'assets/stylesFrontEnd.css');
         wp_enqueue_style('pluginBootstrap', $this->plugin_url . 'assets/bootstrap.min.css');
+        wp_enqueue_script('pluginJquery', $this->plugin_url . 'assets/jquery-3.3.1.min.js');
+        wp_enqueue_script('pluginPopper', $this->plugin_url . 'assets/popper.min.js');
         wp_enqueue_script('pluginBootstrapJS', $this->plugin_url . 'assets/bootstrap.min.js');
     }
 }
