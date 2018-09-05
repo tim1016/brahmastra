@@ -34,9 +34,8 @@ var projectURL   = settings.adminURL;
 
 var pluginDir    = settings.pluginDir;
 
-var styleForm     = pluginDir + '/src/scss/form.scss';
-var styleSlider   = pluginDir + '/src/scss/slider.scss';
-var styleSRC      = pluginDir + '/src/scss/mystyle.scss';
+var stylesAdmin     = pluginDir + '/src/scss/stylesAdmin.scss';
+var stylesFrontEnd   = pluginDir + '/src/scss/stylesFrontEnd.scss';
 
 var styleURL     = pluginDir + '/assets/';
 var mapURL       = pluginDir + '/';
@@ -66,7 +65,7 @@ gulp.task( 'plugin-browser-sync', function() {
 });
 
 gulp.task( 'pluginStyles', function() {
-	gulp.src( [styleSRC, styleForm, styleSlider] )
+	gulp.src( [stylesAdmin, stylesFrontEnd] )
 		.pipe( sourcemaps.init() )
 		.pipe( sass({
 			errLogToConsole: true,
