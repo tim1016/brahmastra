@@ -73,7 +73,7 @@ gulp.task( 'pluginStyles', function() {
 		}) )
 		.on( 'error', console.error.bind( console ) )
 		.pipe( autoprefixer({ browsers: [ 'last 2 versions', '> 5%', 'Firefox ESR' ] }) )
-		.pipe( sourcemaps.write( mapURL ) )
+		.pipe( sourcemaps.write('./') )
 		.pipe( gulp.dest( styleURL ) )
 		.pipe( browserSync.stream() );
 });
